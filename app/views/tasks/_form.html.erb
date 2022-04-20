@@ -1,0 +1,25 @@
+<%= form_with(model: task, local: true) do |form| %>
+  <%# task.parent_id para edicao e params[:parent_id] para inclusao de subtarefa %>
+  <%= form.hidden_field :parent_id, value: task.parent_id || params[:parent_id] %>
+
+  <div class="mb-3">
+    <%= form.label :description, class: 'form-label' %>
+    <%= form.text_field :description, class: 'form-control' %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :due_date, class: 'form-label' %>
+    <%= form.date_select :due_date %>
+  </div>
+
+  <div class="mb-3 form-check">
+    <%= form.check_box :done, class: 'form-check-input' %>
+    <%= form.label :done, class: 'form-check-label' %>
+  </div>
+
+  <%= form.submit class: 'btn btn-primary',
+    data: { disable_with: 'Salvando...' } %>
+
+  <%= link_to 'Cancelar', tasks_path, class:'btn btn-secondary' %>  
+
+<% end %>
